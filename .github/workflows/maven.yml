@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "Master" ]
+
+jobs:
+
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag ssm:v${{ github.run_number }}
+      - name: Copy new env file
+        run: cd /home/cicd && cp origin.env .env
+      - name: Pass new version
+        run: cd /home/cicd && sh script.sh __MSS_VERSION__ ${{ github.run_number }} .env
+      - name: Remove old version
+        run: cd /home/cicd && docker compose rm ssm
+      - name: Up new version
+        run: cd /home/cicd && docker compose up -d ssm
