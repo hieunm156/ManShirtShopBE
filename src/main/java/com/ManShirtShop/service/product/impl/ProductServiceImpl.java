@@ -443,34 +443,36 @@ public class ProductServiceImpl implements ProductService {
         if (filter.getLow() == null) {
             Low = productRepository.getLow();
         }
-        if (filter.getLow() == null) {
+        if (filter.getHigh() == null) {
             High = productRepository.getHigh();
         }
-        if (Category.size() == 0){
+        if (Category == null || Category.size() == 0){
             Category = categoryRepository.findAllId();
         }
-        if (Collar.size() == 0){
+        if (Collar == null || Collar.size() == 0){
             Collar = collarRepository.findAllId();
         }
-        if (Color.size() == 0){
+        if (Color == null || Color.size() == 0){
             Color = colorRepository.findAllId();
         }
-        if (Size.size() == 0){
+        if (Size == null || Size.size() == 0){
             Size = sizeRepository.findAllId();
         }
-        if (Sleeve.size() == 0){
+        if (Sleeve == null || Sleeve.size() == 0){
             Sleeve = sleeveRepository.findAllId();
         }
-        if (Design.size() == 0){
+        if (Design == null || Design.size() == 0){
             Design = designRepository.findAllId();
         }
-        if (Form.size() == 0){
+        if (Form == null || Form.size() == 0){
             Form = formRepository.findAllId();
         }
-        if (Material.size() == 0){
+        if (Material == null || Material.size() == 0){
             Material = materialRepository.findAllId();
         }
-        List<Product> getAll = productRepository.getAllByAll(Category, Collar, Design, Form, Material, Sleeve, Size, Color, Status, Low, High);
+        // List<Product> getAll = productRepository.getAllByAll(Category, Collar, Design, Form, Material, Sleeve, Size, Color, Status, Low, High);
+        List<Product> getAll = productRepository.getAllProduct();
+      
         return getAll.stream()
                 .map(entity -> ObjectMapperUtils.map(entity, ProductReponse.class))
                 .collect(Collectors.toList());

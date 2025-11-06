@@ -36,5 +36,9 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
         @Query(value = "SELECT product.price FROM product WHERE product.status = 0 ORDER BY product.price ASC Limit 1", nativeQuery = true)
         Double getLow();   
         @Query(value = "SELECT product.price FROM product WHERE product.status = 0 ORDER BY product.price DESC Limit 1", nativeQuery = true)
-        Double getHigh();               
+        Double getHigh();
+        
+        //temp
+    @Query(value = "Select product.* from product join product_detail on product.id = product_detail.product_id;", nativeQuery = true)
+    List<Product> getAllProduct();
 }
