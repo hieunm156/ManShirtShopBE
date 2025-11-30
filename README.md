@@ -1,6 +1,6 @@
 # Internet Services Architectures
 
-Project contains examples for Internet Services Architectures classes conducted at the FPT POLYTECHNICH of Technology.
+Project contains examples for Internet Services Architectures classes.
 
 ## Requirements
 
